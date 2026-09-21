@@ -1,0 +1,2849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PFII Whitepaper | Pusat Finansial Internasional Indonesia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0a1628;
+            --primary-blue: #1e3a5f;
+            --accent-gold: #c9a962;
+            --accent-teal: #2dd4bf;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --gradient-start: #0f172a;
+            --gradient-end: #1e3a5f;
+            --border-subtle: rgba(201, 169, 98, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* Cover Page */
+        .cover-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 50%, #0d2847 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(201, 169, 98, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(45, 212, 191, 0.06) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a962' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .logo-container {
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-container img {
+            max-width: 320px;
+            height: auto;
+            filter: drop-shadow(0 4px 20px rgba(201, 169, 98, 0.3));
+        }
+
+        .cover-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-subtitle {
+            font-size: 1.4rem;
+            color: var(--accent-gold);
+            font-weight: 500;
+            margin-bottom: 40px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-tagline {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            line-height: 1.8;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-meta {
+            display: flex;
+            gap: 50px;
+            justify-content: center;
+            margin-top: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .meta-value {
+            font-size: 1rem;
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        /* Table of Contents */
+        .toc-page {
+            min-height: 100vh;
+            background: var(--primary-dark);
+            padding: 80px 60px;
+        }
+
+        .toc-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .toc-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+        }
+
+        .toc-divider {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            margin: 0 auto;
+        }
+
+        .toc-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .toc-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 18px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .toc-section:hover {
+            padding-left: 15px;
+            border-bottom-color: var(--accent-gold);
+        }
+
+        .toc-section-title {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .toc-section-number {
+            color: var(--accent-gold);
+            font-weight: 600;
+            margin-right: 15px;
+        }
+
+        .toc-page-num {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Main Content Sections */
+        .section {
+            padding: 80px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 50px;
+        }
+
+        .section-number {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: var(--accent-teal);
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 800px;
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: var(--accent-gold);
+            margin: 25px 0;
+        }
+
+        /* Content Styling */
+        p {
+            margin-bottom: 20px;
+            color: var(--text-muted);
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            margin: 40px 0 20px;
+            font-weight: 600;
+        }
+
+        h4 {
+            font-size: 1.15rem;
+            color: var(--accent-gold);
+            margin: 30px 0 15px;
+            font-weight: 600;
+        }
+
+        /* Feature Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 35px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #e8d5a3 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .feature-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Data Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: rgba(30, 58, 95, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .data-table th {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
+            color: var(--accent-gold);
+            padding: 18px 25px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .data-table td {
+            padding: 18px 25px;
+            border-bottom: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr:hover td {
+            background: rgba(201, 169, 98, 0.05);
+        }
+
+        /* Stat Boxes */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, rgba(30, 58, 95, 0.3) 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent-gold) 0%, var(--accent-teal) 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            border: 3px solid var(--primary-dark);
+        }
+
+        .timeline-phase {
+            font-size: 0.8rem;
+            color: var(--accent-teal);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .timeline-content {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Layer Architecture */
+        .layer-stack {
+            margin: 40px 0;
+        }
+
+        .layer-item {
+            background: linear-gradient(90deg, rgba(201, 169, 98, 0.15) 0%, rgba(30, 58, 95, 0.3) 100%);
+            border-left: 4px solid var(--accent-gold);
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 0 12px 12px 0;
+            transition: all 0.3s ease;
+        }
+
+        .layer-item:hover {
+            transform: translateX(10px);
+            background: linear-gradient(90deg, rgba(201, 169, 98, 0.2) 0%, rgba(30, 58, 95, 0.4) 100%);
+        }
+
+        .layer-number {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: 700;
+            margin-right: 15px;
+        }
+
+        .layer-title {
+            display: inline;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .layer-desc {
+            margin-top: 15px;
+            color: var(--text-muted);
+            padding-left: 50px;
+        }
+
+        /* List Styling */
+        ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+        }
+
+        ul li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+            font-size: 0.6rem;
+            top: 5px;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.1) 0%, rgba(30, 58, 95, 0.3) 100%);
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .highlight-box h4 {
+            color: var(--accent-teal);
+            margin-top: 0;
+        }
+
+        /* Quote Block */
+        .quote-block {
+            border-left: 4px solid var(--accent-gold);
+            padding: 25px 30px;
+            margin: 30px 0;
+            background: rgba(201, 169, 98, 0.05);
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* Leader Profile Cards */
+        .leader-card {
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.5) 0%, rgba(15, 23, 42, 0.7) 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .leader-card:hover {
+            border-color: var(--accent-gold);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .leader-name {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .leader-title {
+            font-size: 1rem;
+            color: var(--accent-gold);
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .leader-bio {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .leader-bio strong {
+            color: var(--text-light);
+        }
+
+        /* Partner Cards */
+        .partner-card {
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .partner-card:hover {
+            border-color: var(--accent-teal);
+            transform: translateX(5px);
+        }
+
+        .partner-name {
+            font-size: 1.3rem;
+            color: var(--accent-gold);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .partner-type {
+            font-size: 0.8rem;
+            color: var(--accent-teal);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .partner-desc {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        .page-footer {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            padding: 60px;
+            text-align: center;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .footer-logo {
+            max-width: 200px;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-disclaimer {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            max-width: 800px;
+            margin: 20px auto 0;
+            opacity: 0.7;
+        }
+
+     
+       /* ========================================= */
+        /* PDF EXPORT & PRINT RULES                  */
+        /* ========================================= */
+        
+        @media print {
+            /* 1. Set Paper Size & Margins */
+            @page {
+                size: A4 portrait;
+                margin: 0 !important;/* Standard physical paper margin */
+            }
+
+            /* 2. Force Dark Theme Colors to Print */
+            body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                background-color: var(--primary-dark) !important;
+            }
+
+            /* 3. Nuclear Reset: Fixes the Blank First Page Bug */
+            html, body, .cover-page, .toc-page, .section, main, .container {
+                display: block !important;
+                position: relative !important;
+                height: auto !important;
+                min-height: 0 !important;
+                max-height: none !important;
+                overflow: visible !important;
+                float: none !important;
+                align-items: flex-start !important;
+                justify-content: flex-start !important;
+                break-inside: auto !important;
+                page-break-inside: auto !important;
+            }
+
+          
+           /* 4. FIX: Use Padding for spacing (Keeps the background colored!) */
+            .section, .toc-page {
+                /* 30mm top/bottom, 35mm left/right (adjust the 35mm if you want it further inward) */
+                padding: 30mm 20mm !important; 
+                margin: 0 !important;
+                box-sizing: border-box !important;
+                width: 100% !important;
+            }
+
+            /* 5. FIX: Re-center the Cover Page with side padding */
+            .cover-page {
+                /* 25vh top, 35mm right, 0 bottom, 35mm left */
+                padding: 25vh 35mm 0 35mm !important; 
+                margin: 0 !important;
+                box-sizing: border-box !important;
+                width: 100% !important;
+            }
+
+            /* 6. Force strict page breaks for major sections */
+            .cover-page, .toc-page, .section {
+                page-break-before: always !important;
+                break-before: page !important;
+            }
+
+            /* EXCEPTION: Never break before the very first element (fixes blank page 1) */
+            body > *:first-child,
+            .cover-page:first-of-type {
+                page-break-before: auto !important;
+                break-before: auto !important;
+            }
+
+            /* 7. Prevent specific UI cards from being sliced in half */
+            .feature-card, .stat-box, .leader-card, .partner-card, .highlight-box, tr, img, p, li {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+        }
+
+        /* ========================================= */
+        /* RESPONSIVE DESIGN                         */
+        /* ========================================= */
+        @media (max-width: 768px) {
+            .cover-title {
+                font-size: 2.5rem;
+            }
+
+            .section {
+                padding: 50px 30px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cover Page -->
+    <div class="cover-page">
+        <h1 class="cover-title">Pusat Finansial<br>Internasional Indonesia</h1>
+        <p class="cover-subtitle">PFII Whitepaper</p>
+        <p class="cover-tagline">
+            Sovereign Digital Asset Financial Freezone — Master Architecture & Strategic Roadmap<br>
+            <em>Indonesia's Gateway to the Global Digital Economy</em>
+        </p>
+        <div class="cover-meta">
+            <div class="meta-item">
+                <div class="meta-label">Version</div>
+                <div class="meta-value">2.0 Expanded</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Target Fund</div>
+                <div class="meta-value">US$ 3-5 Billion</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Implementation</div>
+                <div class="meta-value">36 Months</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc-page">
+        <div class="toc-header">
+            <h2 class="toc-title">Table of Contents</h2>
+            <div class="toc-divider"></div>
+        </div>
+        <div class="toc-content">
+            <div class="toc-section">
+                <span><span class="toc-section-number">I.</span>Executive Summary</span>
+                <span class="toc-page-num">3</span>
+            </div>
+            <div class="toc-section">
+                <span><span class="toc-section-number">II.</span>Macroeconomic Context & Global Trends</span>
+                <span class="toc-page-num">5</span>
+            </div>
+            <div class="toc-section">
+                <span><span class="toc-section-number">III.</span>Strategic Imperative: Why Indonesia Must Lead</span>
+                <span class="toc-page-num">7</span>
+            </div>
+            <div class="toc-section">
+                <span><span class="toc-section-number">IV.</span>Bandung Strategic Anchor (BDAZ)</span>
+                <span class="toc-page-num">9</span>
+            </div>
+            <div class="toc-section">
+                <span><span class="toc-section-number">V.</span>Eight Defensible Moats & Concessions</span>
+                <span class="toc-page-num">11</span>
+            </div>
+            <div class="toc-section">
+                <span><span class="toc-section-number">VI.</span>Five-Layer Architecture</span>
+                <span class="toc-page-num">13</span>
+            </div>
+            <div class="toc-section">
+                <span><span class="toc-section-number">VII.</span>Tokenization Mechanisms & Digital Assets</span>
+                <span class="toc-page-num">16</span>
+            </div>
+            <div class="toc-section">
+                <span><span class="toc-section-number">VIII.</span>Fund Structure & Capital Engineering</span>
+                <span class="toc-page-num">19</span>
+            </div>
+            <div class="toc-section">
+                <span><span class="toc-section-number">IX.</span>Governance & Compliance Framework</span>
+                <span class="toc-page-num">22</span>
+            </div>
+            <div class="toc-section">
+                <span><span class="toc-section-number">X.</span>Technical Infrastructure & Blockchain Architecture</span>
+                <span class="toc-page-num">25</span>
+            </div>
+            <div class="toc-section">
+                <span><span class="toc-section-number">XI.</span>Implementation Roadmap</span>
+                <span class="toc-page-num">28</span>
+            </div>
+            <div class="toc-section">
+                <span><span class="toc-section-number">XII.</span>Risk Management & ESG Framework</span>
+                <span class="toc-page-num">31</span>
+            </div>
+            <div class="toc-section">
+                <span><span class="toc-section-number">XIII.</span>Key Performance Indicators</span>
+                <span class="toc-page-num">34</span>
+            </div>
+            <div class="toc-section">
+                <span><span class="toc-section-number">XIV.</span>Investor Incentives</span>
+                <span class="toc-page-num">37</span>
+            </div>
+            <div class="toc-section">
+                <span><span class="toc-section-number">XV.</span>Comprehensive Partnership Ecosystem</span>
+                <span class="toc-page-num">40</span>
+            </div>
+            <div class="toc-section">
+                <span><span class="toc-section-number">XVI.</span>Leadership Team — Complete Profiles</span>
+                <span class="toc-page-num">47</span>
+            </div>
+            <div class="toc-section">
+                <span><span class="toc-section-number">XVII.</span>Advisory Councils</span>
+                <span class="toc-page-num">52</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section I: Executive Summary -->
+    <section class="section" id="executive-summary">
+        <div class="section-header">
+            <span class="section-number">Section I</span>
+            <h2 class="section-title">Executive Summary</h2>
+            <div class="divider"></div>
+        </div>
+
+        <p>The <strong>Pusat Finansial Internasional Indonesia (PFII)</strong> represents a paradigm shift in sovereign financial architecture—establishing Indonesia as the world's premier <strong>Sovereign Real-Asset & Digital Asset Gateway</strong>. Anchored in <strong>Bandung Digital Asset Zone (BDAZ)</strong>, PFII transitions Indonesia from a passive commodity exporter into an active sovereign price-setter and digital capital allocator.</p>
+
+        <div class="quote-block">
+            "By anchoring global liquidity to real-world infrastructure, physical natural resource reserves, high-performance computing, and sovereign power assets, PFII elevates tokenization far beyond traditional financial freezones."
+        </div>
+
+        <p>Unlike legacy international financial hubs such as GIFT City (India) and DIFC (Dubai)—which function primarily as paper-derivative hubs vulnerable to market crashes—PFII integrates <strong>physical commodity backing</strong>, <strong>instant T+0 settlement</strong>, and <strong>programmable compliance</strong> to deliver unprecedented capital velocity across global trade corridors.</p>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-value">$3-5B</div>
+                <div class="stat-label">First Close Target</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">$10-15B</div>
+                <div class="stat-label">FDI Target (36 mo)</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">$50B+</div>
+                <div class="stat-label">Annual Settlement Volume</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">5,000+</div>
+                <div class="stat-label">Technical Jobs Created</div>
+            </div>
+        </div>
+
+        <h3>Core Value Propositions</h3>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🏛️</div>
+                <div class="feature-title">Sovereign Gateway</div>
+                <div class="feature-desc">Lock in 10-20 year off-take supplies of strategic raw materials including physical gold, nickel, copper, and agricultural commodities. Direct access to Indonesia's sovereign resource wealth through tokenized instruments.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Instant Settlement</div>
+                <div class="feature-desc">T+0 cross-border settlement via NIDR 1:1 tokenized Rupiah digital banking network with sub-2-minute clearing. Eliminates 3-5 day correspondent banking delays and reduces transaction costs by up to 90%.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-title">Volatility Protection</div>
+                <div class="feature-desc">USD-denominated Danantara bonds provide full FX downside protection while maintaining liquid secondary market exit options. Investors gain IDR exposure without currency risk through sovereign-backed collateral.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌱</div>
+                <div class="feature-title">ESG Integration</div>
+                <div class="feature-desc">Transactions bundled with verified carbon credits from West Java green projects and 100% renewable energy infrastructure. Proof-of-Green-Compute certification for all AIDC operations.</div>
+            </div>
+        </div>
+
+        <h3>Strategic Differentiation from Legacy Financial Hubs</h3>
+        <p>PFII fundamentally differs from existing international financial centers by anchoring digital assets to <strong>physical, sovereign-controlled reserves</strong>. While GIFT City and DIFC rely on paper derivatives and offshore structures vulnerable to global liquidity shocks, PFII's architecture ensures:</p>
+        <ul>
+            <li><strong>Physical Backing:</strong> Every tokenized asset corresponds to verified physical reserves (gold bullion, mineral stockpiles, energy infrastructure)</li>
+            <li><strong>Sovereign Control:</strong> Indonesia maintains price-setting authority over its strategic resources rather than accepting international benchmark pricing</li>
+            <li><strong>Programmable Compliance:</strong> Smart contract enforcement of KYC/AML, tax withholding, and regulatory reporting eliminates manual compliance overhead</li>
+            <li><strong>Asian-African Corridor:</strong> Purpose-built to serve emerging market trade flows outside traditional Western financial infrastructure</li>
+        </ul>
+    </section>
+
+    <!-- Section II: Macroeconomic Context -->
+    <section class="section" id="macro-context">
+        <div class="section-header">
+            <span class="section-number">Section II</span>
+            <h2 class="section-title">Macroeconomic Context & Global Trends</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">Understanding the paradigm shift from legacy paper-asset havens to sovereign digital infrastructure</p>
+        </div>
+
+        <h3>The Old Model vs. The New Model</h3>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Legacy Model (GIFT, DIFC)</th>
+                    <th>PFII Model (BDAZ)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Asset Base</td>
+                    <td>Paper derivatives, offshore structures</td>
+                    <td>Physical commodities, energy, AIDC, DePIN</td>
+                </tr>
+                <tr>
+                    <td>Settlement Speed</td>
+                    <td>T+2 to T+5 (2-5 days)</td>
+                    <td>T+0 (Instant on-chain)</td>
+                </tr>
+                <tr>
+                    <td>Cost Structure</td>
+                    <td>High overhead, multiple intermediaries</td>
+                    <td>Streamlined, automated compliance</td>
+                </tr>
+                <tr>
+                    <td>Identity Management</td>
+                    <td>Repeated KYC across entities</td>
+                    <td>Reusable ZKP digital identity</td>
+                </tr>
+                <tr>
+                    <td>Crisis Resilience</td>
+                    <td>Vulnerable to liquidity freezes</td>
+                    <td>Asset-backed stability mechanisms</td>
+                </tr>
+                <tr>
+                    <td>Geographic Focus</td>
+                    <td>Western capital markets</td>
+                    <td>Asian-African trade corridors</td>
+                </tr>
+                <tr>
+                    <td>Regulatory Framework</td>
+                    <td>Multiple jurisdictional arbitrage</td>
+                    <td>Single sovereign framework (UU P2SK)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Key Global Institutional Milestones</h3>
+        <ul>
+            <li><strong>Sovereign Stablecoin & CBDC Proliferation:</strong> Central banks and sovereign wealth entities deploying digital currency infrastructure for cross-border settlement. Over 130 countries exploring CBDC implementation.</li>
+            <li><strong>Real-World Asset (RWA) Tokenization:</strong> BlackRock, Fidelity, and Franklin Templeton launching tokenized treasury and equity products on regulated blockchain infrastructure. McKinsey projects $10 trillion RWA market by 2030.</li>
+            <li><strong>Institutional Crypto Custody:</strong> BNY Mellon, State Street, and Citibank offering segregated crypto custody and prime brokerage services to institutional clients.</li>
+            <li><strong>Spot Digital Asset ETF Approvals:</strong> Compliant access channels for sovereign wealth funds, pension funds, and asset managers opening digital asset exposure.</li>
+            <li><strong>MiCA Regulatory Framework:</strong> EU establishing clear operational, capital, and disclosure standards for global harmonization of digital asset regulation.</li>
+            <li><strong>West-to-East Capital Migration:</strong> Institutional capital flowing toward resource-backed Asian jurisdictions as geopolitical tensions reshape global trade patterns.</li>
+            <li><strong>BRICS De-dollarization:</strong> Emerging market economies actively developing alternative settlement mechanisms outside USD-denominated systems.</li>
+        </ul>
+
+        <h3>Indonesia's Position in the Global Shift</h3>
+        <p>Indonesia occupies a unique strategic position at the intersection of these global trends:</p>
+        <div class="highlight-box">
+            <h4>Critical Mass Convergence</h4>
+            <ul>
+                <li><strong>Resource Wealth:</strong> World's largest nickel reserves (21% of global supply), significant gold, tin, copper, and rare earth deposits</li>
+                <li><strong>Demographic Scale:</strong> 280 million population with 70% under age 40, creating massive domestic market and tech talent pipeline</li>
+                <li><strong>Geographic Centrality:</strong> Astride critical Indo-Pacific shipping lanes connecting Asian manufacturing to global markets</li>
+                <li><strong>Digital Adoption:</strong> 204 million internet users, $77 billion digital economy projected by 2025</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section III: Strategic Imperative -->
+    <section class="section" id="strategic-imperative">
+        <div class="section-header">
+            <span class="section-number">Section III</span>
+            <h2 class="section-title">Strategic Imperative: Why Indonesia Must Lead</h2>
+            <div class="divider"></div>
+        </div>
+
+        <p>Indonesia stands at a critical juncture in the global economy. During previous technological revolutions—most notably Web 2.0 and the initial artificial intelligence boom—developing nations were largely relegated to the perimeter, serving as passive consumers and commodity suppliers while value accumulated in Western tech hubs.</p>
+
+        <div class="highlight-box">
+            <h4>The Make in Indonesia Directive</h4>
+            <p>PFII transitions Indonesia from a passive exporter of raw physical commodities into an active <strong>sovereign price setter</strong> and <strong>digital capital allocator</strong>—establishing the benchmark for sovereign digital assets, high-density compute infrastructure, and institutional-grade financial innovation. This represents a fundamental shift from resource extraction to value creation.</p>
+        </div>
+
+        <h3>Indonesia's Foundational Advantages</h3>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⛏️</div>
+                <div class="feature-title">Natural Resource Dominance</div>
+                <div class="feature-desc">World-leading reserves of nickel (21% global), tin (17% global), copper, gold, and green geothermal energy—providing physical collateral for sovereign digital assets. Indonesia banned raw nickel ore exports in 2020, demonstrating sovereign resource control.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <div class="feature-title">Demographic Dividend</div>
+                <div class="feature-desc">Massive tech-native youth population creating a continuous pipeline of engineering and cryptographic talent. 53 million SMEs ready for digital financial inclusion. World's 4th largest population.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌏</div>
+                <div class="feature-title">Strategic Geography</div>
+                <div class="feature-desc">Positioned across vital Indo-Pacific trade routes, serving as a neutral corridor for Asian, African, and Middle Eastern economies. Bandung's 1955 Asian-African Conference legacy provides diplomatic foundation.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔋</div>
+                <div class="feature-title">Energy Infrastructure</div>
+                <div class="feature-desc">Access to 40% of global geothermal reserves, sustainable solar potential, and renewable microgrids powering high-density AI Data Centers. 780MW clean energy assets ready for integration.</div>
+            </div>
+        </div>
+
+        <h3>The Cost of Inaction</h3>
+        <p>Without proactive positioning, Indonesia risks:</p>
+        <ul>
+            <li>Continued commodity price-taking rather than price-setting in global markets</li>
+            <li>Capture of digital economy value by foreign platforms and financial intermediaries</li>
+            <li>Brain drain of technical talent to competing regional hubs (Singapore, Hong Kong, Dubai)</li>
+            <li>Exclusion from emerging digital trade corridors and CBDC settlement networks</li>
+            <li>Dependency on Western financial infrastructure for cross-border transactions</li>
+        </ul>
+    </section>
+
+    <!-- Section IV: Bandung Strategic Anchor -->
+    <section class="section" id="bandung-anchor">
+        <div class="section-header">
+            <span class="section-number">Section IV</span>
+            <h2 class="section-title">Bandung Strategic Anchor (BDAZ)</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">The 12km Cibeureum–Cicaheum Financial Corridor</p>
+        </div>
+
+        <p>The <strong>Bandung Digital Asset Zone (BDAZ)</strong> serves as the physical and administrative heart of PFII—a 12-kilometer commercial corridor designated as the core financial spine incorporating fast-tracked land assembly, ultra-high-speed fiber connectivity, secure institutional vaults, and dedicated headquarters for global Web3, AI, and digital asset enterprises.</p>
+
+        <h3>Why Bandung?</h3>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🏛️</div>
+                <div class="feature-title">Historical Significance</div>
+                <div class="feature-desc">Bandung hosted the landmark 1955 Asian-African Conference, establishing its legacy as a neutral ground for Global South cooperation. This diplomatic heritage positions BDAZ as a natural hub for South-South trade corridors.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎓</div>
+                <div class="feature-title">Academic Excellence</div>
+                <div class="feature-desc">Home to Institut Teknologi Bandung (ITB), Indonesia's premier technical university, providing continuous pipeline of engineering, cryptographic, and AI talent directly into the PFII ecosystem.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏔️</div>
+                <div class="feature-title">Geographic Advantages</div>
+                <div class="feature-desc">Highland climate (cooler temperatures reduce data center cooling costs), proximity to Jakarta (2-hour rail), access to West Java's geothermal energy resources, and seismic stability.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💼</div>
+                <div class="feature-title">Municipal Commitment</div>
+                <div class="feature-desc">Mayor Muhammad Farhan's administration has committed full municipal resources to BDAZ development, including expedited permitting, dedicated land assembly, and tax incentive structures.</div>
+            </div>
+        </div>
+
+        <h3>Integrated Physical Infrastructure</h3>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Executing Entity</th>
+                    <th>Primary Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Clearing & Tokenization Hub</td>
+                    <td>NIDR Ecosystem / Holding</td>
+                    <td>Core RWA tokenization, smart contract settlement, NIDR stablecoin minting and redemption</td>
+                </tr>
+                <tr>
+                    <td>Sovereign RWA Exchange</td>
+                    <td>Bandung RWA Commodity Exchange</td>
+                    <td>On-chain bursa for Gold, Nickel, Food SRG; Global Price Setter; Bandung Gold Price Index (BGPI)</td>
+                </tr>
+                <tr>
+                    <td>Server & Data Infrastructure</td>
+                    <td>BDAZ AIDC</td>
+                    <td>3-5 MW AI Data Center, RWA clearing node, Provincial AI Hub, MCP workload execution</td>
+                </tr>
+                <tr>
+                    <td>Banking & Escrow Rail</td>
+                    <td>PT BPR Bank Bandung</td>
+                    <td>OJK-licensed bank, correspondent banking, municipal escrow, fiat on/off ramp</td>
+                </tr>
+                <tr>
+                    <td>Digital Neo-Bank Engine</td>
+                    <td>PT Bandung Digital Neo (JV SPV)</td>
+                    <td>Joint Venture operating Neo-Bank applications, digital wallet infrastructure</td>
+                </tr>
+                <tr>
+                    <td>Green Compute Zone</td>
+                    <td>Green BTC Mining Zone</td>
+                    <td>ESG-compliant mining using stranded renewable energy, Proof-of-Green-Compute certification</td>
+                </tr>
+                <tr>
+                    <td>Arbitration Centre</td>
+                    <td>BIDAC</td>
+                    <td>Bandung International Digital Arbitration Centre for smart contract dispute resolution</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="highlight-box">
+            <h4>The Spirit of Jalan Asia Afrika</h4>
+            <p>Drawing on Bandung's historic role as the cradle of the <strong>1955 Asian-African Conference</strong>, PFII positions itself as a neutral, sovereign multi-currency trade settlement and digital asset clearing corridor for economies seeking independence from legacy financial enclaves. The Jalan Asia Afrika corridor within BDAZ serves as the official trade brokerage and diplomatic interface zone.</p>
+        </div>
+    </section>
+
+    <!-- Section V: Eight Defensible Moats -->
+    <section class="section" id="moats">
+        <div class="section-header">
+            <span class="section-number">Section V</span>
+            <h2 class="section-title">Eight Defensible Moats & Concessions</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">Exclusive operational rights creating sustainable competitive advantages</p>
+        </div>
+
+        <p>PFII's architecture incorporates eight distinct <strong>defensible moats</strong>—exclusive operational concessions that create sustainable competitive advantages impossible for competitors to replicate without equivalent sovereign partnerships.</p>
+
+        <div class="layer-stack">
+            <div class="layer-item">
+                <span class="layer-number">1</span>
+                <span class="layer-title">Banking & Escrow Concession</span>
+                <div class="layer-desc">
+                    <p><strong>100% of SEZ investor capital clears through Bank Bandung & JV Digital Neo.</strong> All foreign investment entering the BDAZ Special Economic Zone must utilize the designated banking infrastructure, creating guaranteed transaction volume and fee capture. This includes initial capital injection, ongoing operational funding, profit repatriation, and all cross-border settlements.</p>
+                </div>
+            </div>
+
+            <div class="layer-item">
+                <span class="layer-number">2</span>
+                <span class="layer-title">Sovereign RWA Exchange</span>
+                <div class="layer-desc">
+                    <p><strong>Exclusive on-chain exchange with Bandung Gold Price Index (BGPI).</strong> PFII operates the sole authorized platform for tokenized commodity trading within the zone, including physical gold, strategic minerals, agricultural receipts, and carbon credits. The BGPI establishes Indonesia as a price-setter rather than price-taker for precious metals.</p>
+                </div>
+            </div>
+
+            <div class="layer-item">
+                <span class="layer-number">3</span>
+                <span class="layer-title">Data Center Clearing Node</span>
+                <div class="layer-desc">
+                    <p><strong>BDAZ as sole clearing node with automated 0.05%-0.10% transaction fee.</strong> All RWA tokenization, smart contract execution, and cross-border settlement within the ecosystem routes through BDAZ infrastructure, generating sustainable fee income while maintaining data sovereignty.</p>
+                </div>
+            </div>
+
+            <div class="layer-item">
+                <span class="layer-number">4</span>
+                <span class="layer-title">Provincial Data Consolidation</span>
+                <div class="layer-desc">
+                    <p><strong>Centralized cloud serving 27 West Java regencies/cities.</strong> BDAZ operates the official provincial data infrastructure, consolidating government services, citizen data, and municipal operations across West Java's 48 million residents. This creates both revenue streams and strategic data positioning.</p>
+                </div>
+            </div>
+
+            <div class="layer-item">
+                <span class="layer-number">5</span>
+                <span class="layer-title">Land Assembly Concession</span>
+                <div class="layer-desc">
+                    <p><strong>Pre-emptive long-term leases along 12km corridor.</strong> Exclusive development rights for the Cibeureum-Cicaheum corridor, including commercial real estate, infrastructure development, and future expansion zones. Land appreciation captured within the PFII ecosystem.</p>
+                </div>
+            </div>
+
+            <div class="layer-item">
+                <span class="layer-number">6</span>
+                <span class="layer-title">Permit Concierge Services</span>
+                <div class="layer-desc">
+                    <p><strong>Single-window enterprise licensing and regulatory interface.</strong> PFII operates the exclusive permit processing service for all BDAZ enterprises, streamlining business incorporation, environmental compliance (AMDAL), construction permits (PBG/SLF), and ongoing regulatory reporting.</p>
+                </div>
+            </div>
+
+            <div class="layer-item">
+                <span class="layer-number">7</span>
+                <span class="layer-title">Asian-African Trade Brokerage</span>
+                <div class="layer-desc">
+                    <p><strong>Official matchmaker along Jalan Asia Afrika.</strong> Designated trade facilitation authority for South-South commerce, including B2B introductions, trade finance arrangement, commodity off-take negotiation, and diplomatic liaison services.</p>
+                </div>
+            </div>
+
+            <div class="layer-item">
+                <span class="layer-number">8</span>
+                <span class="layer-title">BDAZ Physical Campus</span>
+                <div class="layer-desc">
+                    <p><strong>Administrative hub, Visa Center, and BIDAC arbitration.</strong> Central physical infrastructure including enterprise headquarters, investor visa processing, international arbitration facilities, and conference/exhibition spaces. Creates network effects as ecosystem participants co-locate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section VI: Five-Layer Architecture -->
+    <section class="section" id="architecture">
+        <div class="section-header">
+            <span class="section-number">Section VI</span>
+            <h2 class="section-title">Five-Layer Architecture</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">Synchronized operational hierarchy engineered for absolute information density</p>
+        </div>
+
+        <p>PFII operates across a synchronized five-layer architecture, each building upon the foundation of the previous while maintaining strict operational hierarchy and cross-layer interoperability. This design ensures that value flows efficiently from physical assets through digital instruments to global markets.</p>
+
+        <div class="layer-stack">
+            <div class="layer-item">
+                <span class="layer-number">1</span>
+                <span class="layer-title">Base Layer — Funding, Infrastructure & Governance</span>
+                <div class="layer-desc">
+                    <p>Establishes the macroeconomic foundation unifying long-term capital deployment, resilient power microgrids, regulatory oversight, and institutional compliance. This layer provides the stable foundation upon which all other operations depend.</p>
+                    <ul>
+                        <li><strong>Capital Formation:</strong> Sovereign wealth funds, institutional LPs, and strategic corporate investors</li>
+                        <li><strong>Energy Infrastructure:</strong> Sustainable power microgrids (780MW geothermal, solar, hydroelectric) and high-density compute facilities</li>
+                        <li><strong>Regulatory Framework:</strong> Statutory frameworks under Law UU P2SK and single-window enterprise licensing</li>
+                        <li><strong>Identity Layer:</strong> ZKP self-sovereign identity (W3C SSI standards) for cross-border investor onboarding</li>
+                        <li><strong>Legal Infrastructure:</strong> Decentralized arbitration (BIDAC) and smart contract legal wrappers</li>
+                        <li><strong>Physical Security:</strong> Institutional-grade vaults, secure data centers, and compliance monitoring</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="layer-item">
+                <span class="layer-number">2</span>
+                <span class="layer-title">Digital Asset Layer — Stablecoins & Settlement Rails</span>
+                <div class="layer-desc">
+                    <p>The primary transactional monetary engine providing seamless liquidity rails, resilient clearing infrastructure, and FX risk mitigation. This layer enables instant, low-cost value transfer across the ecosystem.</p>
+                    <ul>
+                        <li><strong>NIDR Stablecoin:</strong> Sovereign-pegged 1:1 Rupiah stablecoin for real-time T+0 settlement</li>
+                        <li><strong>sNIDR Yield Token:</strong> Yield-bearing instrument backed by 70% Indonesian Government Bonds (SBN) + 30% fiat reserves</li>
+                        <li><strong>Neo-Banking Core:</strong> Automated escrow, programmatic treasury management, and smart contract wallets</li>
+                        <li><strong>CBDC Bridges:</strong> Interoperability with Bank Indonesia Digital Rupiah and regional CBDCs</li>
+                        <li><strong>OTC Infrastructure:</strong> 24/7 institutional OTC desks and regulated digital asset exchanges</li>
+                        <li><strong>FX Hedging:</strong> Danantara Bond mechanism for USD-denominated investor protection</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="layer-item">
+                <span class="layer-number">3</span>
+                <span class="layer-title">Real-World Asset Layer — Tokenized Minerals & Commodities</span>
+                <div class="layer-desc">
+                    <p>Translates physical sovereign wealth into liquid digital financial instruments with continuous 24/7 liquidity. This layer bridges the physical and digital economies.</p>
+                    <ul>
+                        <li><strong>Strategic Minerals:</strong> Tokenized gold, nickel, copper, tin, and rare earth reserves with 1:1 physical backing</li>
+                        <li><strong>Warehouse Receipts (SRG):</strong> Agricultural commodity tokens for coffee, tea, palm oil, and spices</li>
+                        <li><strong>Real Estate:</strong> Fractionalized commercial property along the 12km corridor as yield-bearing collateral</li>
+                        <li><strong>Carbon Credits:</strong> Verified offsets from West Java green projects with on-chain tracking</li>
+                        <li><strong>Infrastructure Rights:</strong> Tokenized revenue streams from toll roads, seaports, and energy grids</li>
+                        <li><strong>Luxury Assets:</strong> Fine art, collectibles, and cultural heritage tokenization</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="layer-item">
+                <span class="layer-number">4</span>
+                <span class="layer-title">Strategic Sector Layer — DePIN & AI Infrastructure</span>
+                <div class="layer-desc">
+                    <p>Decentralized Physical Infrastructure Networks (DePIN) powering the next generation of compute and energy systems. This layer positions Indonesia at the frontier of AI and machine economy infrastructure.</p>
+                    <ul>
+                        <li><strong>AI Data Centers (AIDC):</strong> 3-5 MW high-density GPU clusters powered by geothermal energy</li>
+                        <li><strong>MCP Workloads:</strong> Model Context Protocol execution for enterprise AI applications</li>
+                        <li><strong>Batam GPU Clusters:</strong> Distributed compute infrastructure across Indonesian islands</li>
+                        <li><strong>Green BTC Mining:</strong> ESG-compliant mining using off-peak stranded renewable energy</li>
+                        <li><strong>peaq Network Integration:</strong> L1 machine economy protocol for IoT and DePIN workloads</li>
+                        <li><strong>Orbital Infrastructure:</strong> Deep tech expansion including satellite and space technology ventures</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="layer-item">
+                <span class="layer-number">5</span>
+                <span class="layer-title">International Expansion Layer — Global Corridors</span>
+                <div class="layer-desc">
+                    <p>Extending PFII's reach across Asia, Africa, and the Middle East through federated protocols and international partnerships.</p>
+                    <ul>
+                        <li><strong>Federated SEZ Protocol:</strong> Interoperable standard linking partner Special Economic Zones across multiple jurisdictions</li>
+                        <li><strong>Global RWA Exchange (GRX):</strong> 24/7 cross-border tokenized asset trading platform</li>
+                        <li><strong>Wholesale Stablecoin Rails:</strong> Eliminating correspondent banking friction for institutional transfers</li>
+                        <li><strong>Trade Insurance:</strong> Decentralized trade credit insurance and FX hedging protocols</li>
+                        <li><strong>BRICS Integration:</strong> Wholesale stablecoin interoperability with emerging market settlement systems</li>
+                        <li><strong>Diplomatic Corridors:</strong> Asian-African Conference network for government-to-government facilitation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section VII: Tokenization Mechanisms -->
+    <section class="section" id="tokenization">
+        <div class="section-header">
+            <span class="section-number">Section VII</span>
+            <h2 class="section-title">Tokenization Mechanisms & Digital Assets</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">Converting tangible physical assets into liquid, programmable digital tokens</p>
+        </div>
+
+        <h3>The NIDR Stablecoin Ecosystem</h3>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💎</div>
+                <div class="feature-title">NIDR (Nusantara IDR)</div>
+                <div class="feature-desc">
+                    <strong>1:1 Tokenized Rupiah</strong><br><br>
+                    Fully backed transactional digital currency for instant cross-border settlement, municipal payment clearing, and automated trade execution. Sub-2-minute T+0 settlement eliminates traditional 3-5 day correspondent banking delays.<br><br>
+                    <strong>Technical Specifications:</strong>
+                    <ul>
+                        <li>ERC-20 compatible on Polygon Enterprise L2</li>
+                        <li>Real-time attestation of fiat reserves</li>
+                        <li>Programmable compliance (automated tax withholding)</li>
+                        <li>Multi-chain bridge support for cross-ecosystem liquidity</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <div class="feature-title">sNIDR (Yield-Bearing)</div>
+                <div class="feature-desc">
+                    <strong>70% SBN + 30% Fiat Reserve</strong><br><br>
+                    Specialized yield-bearing token backed by Indonesian Government Bonds (Surat Berharga Negara), distributing risk-free sovereign yields directly to institutional liquidity providers.<br><br>
+                    <strong>Yield Mechanics:</strong>
+                    <ul>
+                        <li>70% allocation to SBN generating 6-8% annual yield</li>
+                        <li>30% liquid fiat reserves for redemption buffer</li>
+                        <li>Daily yield accrual with monthly distribution</li>
+                        <li>Institutional-only access with minimum thresholds</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h3>Danantara Bond Mechanism</h3>
+
+        <p>The <strong>Danantara USD Bond</strong> structure provides dual benefits: protecting foreign investors from IDR FX volatility while securing long-term foreign capital for Indonesia's national strategic development. This innovative mechanism enables global investors to access Indonesian growth without currency risk.</p>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-phase">Step 1</div>
+                <div class="timeline-title">Bond Purchase</div>
+                <div class="timeline-content">Foreign investor purchases USD-denominated Danantara Bond through authorized channels. Bond terms range from 3-10 years with competitive sovereign yields.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-phase">Step 2</div>
+                <div class="timeline-title">Capital Retention</div>
+                <div class="timeline-content">Danantara (Indonesia's sovereign wealth manager) retains USD capital for national strategic infrastructure development including AIDC, energy grids, and transportation.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-phase">Step 3</div>
+                <div class="timeline-title">Vault Escrow</div>
+                <div class="timeline-content">Bond asset deposited into secure Vault Escrow system with real-time on-chain attestation. Smart contract governance ensures transparent collateral management.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-phase">Step 4</div>
+                <div class="timeline-title">NIDR Minting</div>
+                <div class="timeline-content">Nusantara mints equivalent NIDR stablecoins backed by the bond collateral at prevailing exchange rates. Investor receives NIDR for ecosystem participation.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-phase">Step 5</div>
+                <div class="timeline-title">Market Liquidity</div>
+                <div class="timeline-content">NIDR enters secondary market, providing ecosystem-wide liquidity for RWA purchases, trade settlement, and investment activities. Upon bond maturity, investor redeems in original USD.</div>
+            </div>
+        </div>
+
+        <h3>Real-World Asset Tokenization Matrix</h3>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Asset Class</th>
+                    <th>Token Mechanism</th>
+                    <th>Backing & Features</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Physical Gold</td>
+                    <td>WGC Index Tokens</td>
+                    <td>1:1 bullion backing in certified vaults, Bandung Gold Price Index (BGPI), World Gold Council standards compliance</td>
+                </tr>
+                <tr>
+                    <td>Strategic Minerals</td>
+                    <td>Commodity Receipts (SRG)</td>
+                    <td>Nickel, copper, tin, rhenium with verified stockpile backing, 10-20 year off-take rights included</td>
+                </tr>
+                <tr>
+                    <td>Agricultural Products</td>
+                    <td>Warehouse Receipts</td>
+                    <td>Coffee, tea, spices, palm oil with instant liquidity, Parahyangan origin certification</td>
+                </tr>
+                <tr>
+                    <td>Commercial Real Estate</td>
+                    <td>Fractionalized Property Tokens</td>
+                    <td>12km corridor properties as yield-bearing collateral, quarterly dividend distribution</td>
+                </tr>
+                <tr>
+                    <td>Carbon Credits</td>
+                    <td>Verified Carbon Units (VCU)</td>
+                    <td>West Java green projects with ESG compliance, Verra/Gold Standard verification</td>
+                </tr>
+                <tr>
+                    <td>Energy Infrastructure</td>
+                    <td>Revenue Right Tokens</td>
+                    <td>Toll roads, seaports, renewable energy grids with cash flow pass-through</td>
+                </tr>
+                <tr>
+                    <td>AI Compute</td>
+                    <td>GPU Hour Tokens</td>
+                    <td>AIDC compute capacity with guaranteed SLA, transferable usage rights</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>x402 Protocol Integration</h3>
+        <div class="highlight-box">
+            <h4>Machine-Payable Web Infrastructure</h4>
+            <p>PFII integrates the <strong>x402 payment protocol</strong> enabling autonomous machine-to-machine transactions. AI agents can programmatically purchase compute resources, data access, and API services using NIDR—creating the foundation for Indonesia's machine economy infrastructure.</p>
+        </div>
+    </section>
+
+    <!-- Section VIII: Fund Structure -->
+    <section class="section" id="fund-structure">
+        <div class="section-header">
+            <span class="section-number">Section VIII</span>
+            <h2 class="section-title">Fund Structure & Capital Engineering</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">Mobilizing global institutional liquidity through dual offshore and domestic frameworks</p>
+        </div>
+
+        <p>The PFII Fund serves as the primary capital acceleration engine, designed to mobilize global institutional liquidity and sovereign capital into key infrastructure, RWA tokenization, and deep tech ventures. Structured through a <strong>dual offshore and domestic parallel fund framework</strong>, it combines regulated investment management with dynamic tokenized revenue rights.</p>
+
+        <h3>Fund Parameters</h3>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Specification</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Legal Vehicle</td>
+                    <td>Offshore fund under PFII framework + Indonesian domestic parallel fund (common law, English language, free FX regime)</td>
+                </tr>
+                <tr>
+                    <td>Target Size</td>
+                    <td>First close US$ 3-5 Billion (benchmarking Stargate's US$10B adapted for Southeast Asia scale)</td>
+                </tr>
+                <tr>
+                    <td>Instrument Types</td>
+                    <td>Hybrid: equity (growth-stage) + project finance (infrastructure) + tokenized revenue rights</td>
+                </tr>
+                <tr>
+                    <td>Investment Period</td>
+                    <td>5-year deployment period with 2-year extension option</td>
+                </tr>
+                <tr>
+                    <td>Fund Term</td>
+                    <td>10 years with two 1-year extensions</td>
+                </tr>
+                <tr>
+                    <td>Management Fee</td>
+                    <td>1.5% on committed capital during investment period, 1.0% on invested capital thereafter</td>
+                </tr>
+                <tr>
+                    <td>Carried Interest</td>
+                    <td>20% over 8% preferred return hurdle</td>
+                </tr>
+                <tr>
+                    <td>Exit Mechanisms</td>
+                    <td>Project IPO/SPAC, RWA secondary market, strategic sale, tokenized fund share transfer</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Management Structure</h3>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th>Entity</th>
+                    <th>Responsibilities</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>General Partner (GP)</td>
+                    <td>Farmsent</td>
+                    <td>Strategic direction, government relations, asset injection decisions, ecosystem architecture</td>
+                </tr>
+                <tr>
+                    <td>Co-GP</td>
+                    <td>Insight Capital</td>
+                    <td>Global fundraising, Mirae Asset channel, international LP relations, Hong Kong SFO compliance</td>
+                </tr>
+                <tr>
+                    <td>Cornerstone Investor</td>
+                    <td>Danantara</td>
+                    <td>National strategy alignment, SOE coordination, sovereign AI policy, USD bond issuance</td>
+                </tr>
+                <tr>
+                    <td>Strategic LP</td>
+                    <td>Mirae Asset</td>
+                    <td>Tokenized product structure, global distribution network, regulated framework expertise</td>
+                </tr>
+                <tr>
+                    <td>Investment Committee</td>
+                    <td>GP + Co-GP + Advisors</td>
+                    <td>Project screening, investment decisions, exit decisions, portfolio management</td>
+                </tr>
+                <tr>
+                    <td>Advisory Board</td>
+                    <td>Industry Experts</td>
+                    <td>Strategic guidance, deal sourcing, ecosystem introductions</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Capital Sources & LP Universe</h3>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-value">Danantara</div>
+                <div class="stat-label">Sovereign Capital Anchor</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">Mirae Asset</div>
+                <div class="stat-label">Strategic Distribution</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">Middle East SWFs</div>
+                <div class="stat-label">Sovereign Wealth Funds</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">Asia Pacific</div>
+                <div class="stat-label">Family Offices & LPs</div>
+            </div>
+        </div>
+
+        <h3>Investment Thesis & Sector Allocation</h3>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🏗️</div>
+                <div class="feature-title">Infrastructure (40%)</div>
+                <div class="feature-desc">AIDC data centers, renewable energy grids, BDAZ physical campus development, provincial data infrastructure, and transportation connectivity.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <div class="feature-title">Digital Assets (30%)</div>
+                <div class="feature-desc">NIDR ecosystem development, RWA tokenization platform, exchange infrastructure, and cross-border settlement rails.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <div class="feature-title">Deep Tech (20%)</div>
+                <div class="feature-desc">AI/ML ventures, DePIN protocols, green compute, and strategic technology partnerships.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌾</div>
+                <div class="feature-title">Strategic Resources (10%)</div>
+                <div class="feature-desc">Commodity off-take positions, agricultural supply chain, and carbon credit origination.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section IX: Governance -->
+    <section class="section" id="governance">
+        <div class="section-header">
+            <span class="section-number">Section IX</span>
+            <h2 class="section-title">Governance & Compliance Framework</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">Institutional-grade compliance with privacy-preserving digital identity</p>
+        </div>
+
+        <h3>Institutional Compliance Stack</h3>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Layer</th>
+                    <th>Technology Partners</th>
+                    <th>Architecture</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Threat Detection</td>
+                    <td>TRM Labs, Hypernative, Forta, Crystal Intelligence</td>
+                    <td>Real-time on-chain monitoring, automated pause triggers, AML screening, sanctions compliance</td>
+                </tr>
+                <tr>
+                    <td>Blockchain Rails</td>
+                    <td>Polygon Enterprise Architecture</td>
+                    <td>High-throughput ZK rails, 10,000+ TPS, sub-second finality, EVM compatibility</td>
+                </tr>
+                <tr>
+                    <td>Interoperability</td>
+                    <td>ISO-20022 & FATF Travel Rule</td>
+                    <td>Standardized messaging, cross-border identity compliance, banking integration</td>
+                </tr>
+                <tr>
+                    <td>Privacy Identity</td>
+                    <td>W3C SSI / ZKP / Billions Network / Privy / Didit</td>
+                    <td>Reusable digital identity without PII exposure, selective disclosure</td>
+                </tr>
+                <tr>
+                    <td>Smart Contract Audit</td>
+                    <td>Hashlock</td>
+                    <td>Formal verification, security audits, continuous monitoring</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Reusable ZKP Digital Identity</h3>
+
+        <p>To eliminate redundant compliance procedures, PFII mandates a <strong>single-point Reusable Digital Identity</strong> built on W3C Self-Sovereign Identity (SSI) standards and Zero-Knowledge Proofs (ZKP). This enables privacy-preserving compliance verification across all ecosystem participants.</p>
+
+        <div class="highlight-box">
+            <h4>One Verification, Universal Access</h4>
+            <p>A single initial KYC/KYB verification generates a cryptographically verifiable credential. Authorized entities—banks, exchanges, tax authorities, trade finance pools—can instantly query identity validity, credit standing, and performance history <strong>without exposing raw PII</strong>. This dramatically reduces compliance costs while improving regulatory auditability.</p>
+            <ul>
+                <li><strong>Billions Network:</strong> ZKP identity proofs for institutional verification</li>
+                <li><strong>Privy:</strong> Embedded wallet and authentication infrastructure</li>
+                <li><strong>Didit:</strong> Decentralized identity verification and credential management</li>
+            </ul>
+        </div>
+
+        <h3>Single-Window Enterprise Interface</h3>
+        <p>PFII's permit concierge service consolidates all regulatory interactions into a unified digital interface:</p>
+        <ul>
+            <li><strong>Business Incorporation:</strong> Company formation, tax registration, and regulatory licensing</li>
+            <li><strong>Environmental Compliance:</strong> AMDAL environmental impact certification</li>
+            <li><strong>Property Services:</strong> Land assembly, leasing, and construction permits (PBG/SLF)</li>
+            <li><strong>Regulatory Reporting:</strong> Real-time auditability and compliance dashboards</li>
+            <li><strong>Visa Processing:</strong> Golden Visa and work permit applications</li>
+            <li><strong>Tax Administration:</strong> Automated tax calculation and filing</li>
+        </ul>
+
+        <h3>Legal Framework</h3>
+        <p>PFII operates under Indonesia's <strong>Law UU P2SK</strong> (Financial Sector Development and Strengthening Law), providing statutory regulatory stability with continuity clauses. Key legal protections include:</p>
+        <ul>
+            <li><strong>MIGA Coverage:</strong> Political risk insurance structured to meet Multilateral Investment Guarantee Agency standards</li>
+            <li><strong>Arbitration Rights:</strong> Access to BIDAC, SIAC, and BANI international arbitration</li>
+            <li><strong>Capital Repatriation:</strong> Guaranteed 100% foreign capital repatriation rights</li>
+            <li><strong>Regulatory Grandfathering:</strong> Existing incentives protected for investment term duration</li>
+        </ul>
+    </section>
+
+    <!-- Section X: Technical Infrastructure -->
+    <section class="section" id="technical">
+        <div class="section-header">
+            <span class="section-number">Section X</span>
+            <h2 class="section-title">Technical Infrastructure & Blockchain Architecture</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">Enterprise-grade distributed systems powering sovereign digital finance</p>
+        </div>
+
+        <h3>Polygon Enterprise L2/L3 Architecture</h3>
+        <p>PFII's core blockchain infrastructure leverages <strong>Polygon's enterprise-grade Layer 2 and Layer 3 solutions</strong>, providing the scalability, security, and regulatory compliance required for sovereign financial operations.</p>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Specification</th>
+                    <th>Capability</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Transaction Throughput</td>
+                    <td>10,000+ TPS with horizontal scaling capability</td>
+                </tr>
+                <tr>
+                    <td>Finality</td>
+                    <td>Sub-second transaction finality for real-time settlement</td>
+                </tr>
+                <tr>
+                    <td>Consensus</td>
+                    <td>ZK-rollup with Ethereum L1 security inheritance</td>
+                </tr>
+                <tr>
+                    <td>Smart Contracts</td>
+                    <td>Full EVM compatibility with Solidity development</td>
+                </tr>
+                <tr>
+                    <td>Privacy</td>
+                    <td>Optional private transaction pools for institutional use</td>
+                </tr>
+                <tr>
+                    <td>Interoperability</td>
+                    <td>Native bridges to Ethereum, multi-chain messaging</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Multi-Chain Interoperability</h3>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔗</div>
+                <div class="feature-title">Polygon Network</div>
+                <div class="feature-desc">Primary settlement layer for NIDR, RWA tokens, and institutional transactions. Enterprise-grade security with ZK-proof verification.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <div class="feature-title">peaq Network</div>
+                <div class="feature-desc">L1 integration for machine economy workloads, DePIN protocols, and IoT device transactions. Native support for machine-to-machine payments.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <div class="feature-title">TON Network</div>
+                <div class="feature-desc">Telegram-native blockchain integration for consumer-facing applications, micropayments, and social commerce within Indonesia's massive Telegram user base.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <div class="feature-title">Cross-Chain Bridges</div>
+                <div class="feature-desc">Decentralized MPC and threshold cryptography enabling secure asset transfers across supported networks without centralized custody risk.</div>
+            </div>
+        </div>
+
+        <h3>Security Architecture</h3>
+        <div class="highlight-box">
+            <h4>Defense-in-Depth Security Model</h4>
+            <ul>
+                <li><strong>Forta Network:</strong> Real-time threat detection and automated response across all smart contracts</li>
+                <li><strong>Hypernative:</strong> Predictive security monitoring with machine learning anomaly detection</li>
+                <li><strong>Hashlock:</strong> Formal verification and continuous security audits of all deployed contracts</li>
+                <li><strong>Circuit Breakers:</strong> Algorithmic pause triggers if NIDR/sNIDR pegs fluctuate beyond ±0.5%</li>
+                <li><strong>Post-Quantum Readiness:</strong> Lattice-based cryptographic migration protocols for long-term security</li>
+            </ul>
+        </div>
+
+        <h3>AI Data Center (AIDC) Specifications</h3>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Specification</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Power Capacity</td>
+                    <td>3-5 MW initial deployment, scalable to 50 MW</td>
+                </tr>
+                <tr>
+                    <td>GPU Infrastructure</td>
+                    <td>NVIDIA H100/H200 clusters for AI/ML workloads</td>
+                </tr>
+                <tr>
+                    <td>Cooling</td>
+                    <td>Liquid immersion cooling with Bandung highland climate advantage</td>
+                </tr>
+                <tr>
+                    <td>Energy Source</td>
+                    <td>100% renewable (geothermal primary, solar backup)</td>
+                </tr>
+                <tr>
+                    <td>Connectivity</td>
+                    <td>Ultra-low-latency fiber to Jakarta, Singapore, and regional hubs</td>
+                </tr>
+                <tr>
+                    <td>Certifications</td>
+                    <td>Tier III+ data center standards, SOC 2 Type II compliance</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Section XI: Implementation Roadmap -->
+    <section class="section" id="roadmap">
+        <div class="section-header">
+            <span class="section-number">Section XI</span>
+            <h2 class="section-title">Implementation Roadmap</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">Structured 36-month phased execution plan with detailed milestones</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-phase">Phase 1: Foundation</div>
+                <div class="timeline-title">Months 0–6</div>
+                <div class="timeline-content">
+                    <p><strong>Objective:</strong> Establish legal, regulatory, and physical infrastructure foundations</p>
+                    <ul>
+                        <li>Finalize statutory regulatory frameworks and enact municipal SEZ regulations with Pemkot Bandung</li>
+                        <li>Complete BDAZ physical campus facilities and office fit-out along Jalan Asia Afrika corridor</li>
+                        <li>Incorporate operating entity PT Bandung Digital Neo (JV SPV) with OJK licensing pathway</li>
+                        <li>Inject seed assets including clean power microgrid assets (initial 50MW allocation)</li>
+                        <li>Launch NIDR OJK sandbox framework with initial pilot participants</li>
+                        <li>Establish BIDAC (Bandung International Digital Arbitration Centre) legal framework</li>
+                        <li>Complete investor visa and Golden Visa processing infrastructure</li>
+                        <li>Sign ITB partnership for PFII Financial Tech Accelerator</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-phase">Phase 2: Acceleration</div>
+                <div class="timeline-title">Months 6–18</div>
+                <div class="timeline-content">
+                    <p><strong>Objective:</strong> Launch core digital infrastructure and initial RWA tokenization</p>
+                    <ul>
+                        <li>Operationalize NIDR digital banking rail and Neo-Banking Core with full OJK compliance</li>
+                        <li>Launch pilot RWA tokenization for physical Gold (WGC Index) with Bandung Gold Price Index (BGPI)</li>
+                        <li>Tokenize strategic minerals (nickel, copper, tin) with verified stockpile backing</li>
+                        <li>Launch agricultural Warehouse Receipts (SRG) tokenization for Parahyangan commodities</li>
+                        <li>Commission high-density AIDC compute facilities (3-5 MW initial deployment)</li>
+                        <li>Deploy Polygon Enterprise L2/L3 infrastructure with 10,000+ TPS capability</li>
+                        <li>Expand sovereign data lake infrastructure serving 27 West Java regencies</li>
+                        <li>Launch PFII Financial Tech Accelerator first cohort with ITB partnership</li>
+                        <li>Integrate Forta, Hypernative, and security monitoring infrastructure</li>
+                        <li>Complete first close of PFII Fund ($3-5B target)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-phase">Phase 3: Maturity & Global Scale</div>
+                <div class="timeline-title">Months 18–36</div>
+                <div class="timeline-content">
+                    <p><strong>Objective:</strong> Achieve operational maturity and international expansion</p>
+                    <ul>
+                        <li>Deploy Federated SEZ Protocol across partner zones in Asia, Africa, and Middle East</li>
+                        <li>Fully launch Global RWA Exchange (GRX) with 24/7 cross-border trading</li>
+                        <li>Operationalize Asian-African trade corridors along Jalan Asia Afrika with diplomatic facilitation</li>
+                        <li>Scale AIDC infrastructure to 50 MW with Batam GPU cluster integration</li>
+                        <li>Launch sNIDR yield-bearing token with institutional LP participation</li>
+                        <li>Expand orbital and deep tech infrastructure networks</li>
+                        <li>Achieve target $50B+ annual settlement volume through NIDR rails</li>
+                        <li>Complete integration with Bank Indonesia Digital Rupiah (CBDC)</li>
+                        <li>Launch BRICS wholesale stablecoin interoperability</li>
+                        <li>Scale to 5,000+ technical jobs within BDAZ ecosystem</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h3>Critical Path Dependencies</h3>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Milestone</th>
+                    <th>Dependencies</th>
+                    <th>Target Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>OJK Sandbox Approval</td>
+                    <td>Regulatory documentation, compliance framework</td>
+                    <td>Month 3</td>
+                </tr>
+                <tr>
+                    <td>NIDR Pilot Launch</td>
+                    <td>OJK sandbox, banking infrastructure, smart contracts</td>
+                    <td>Month 6</td>
+                </tr>
+                <tr>
+                    <td>First Fund Close</td>
+                    <td>LP commitments, legal structuring, regulatory approvals</td>
+                    <td>Month 12</td>
+                </tr>
+                <tr>
+                    <td>AIDC Operational</td>
+                    <td>Power infrastructure, equipment procurement, certifications</td>
+                    <td>Month 15</td>
+                </tr>
+                <tr>
+                    <td>GRX Launch</td>
+                    <td>Exchange licensing, liquidity providers, custody infrastructure</td>
+                    <td>Month 24</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Section XII: Risk Management -->
+    <section class="section" id="risk-management">
+        <div class="section-header">
+            <span class="section-number">Section XII</span>
+            <h2 class="section-title">Risk Management & ESG Framework</h2>
+            <div class="divider"></div>
+        </div>
+
+        <h3>Risk Mitigation Mechanisms</h3>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <div class="feature-title">Algorithmic Circuit Breakers</div>
+                <div class="feature-desc">Automated liquidity freeze triggers and dynamic collateral adjustments if NIDR/sNIDR pegs fluctuate beyond ±0.5% tolerance bounds. Smart contract-enforced pause mechanisms prevent cascade failures.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-title">AML & Sanctions Compliance</div>
+                <div class="feature-desc">Real-time integration with TRM Labs, Forta, and Hypernative for automated address screening and instant transaction pauses. FATF Travel Rule compliance for cross-border transfers.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <div class="feature-title">Regulatory Contingency</div>
+                <div class="feature-desc">Clear fail-safe mechanisms for rapid re-routing of multi-chain settlement rails in response to evolving global standards. Modular architecture enables jurisdiction-specific compliance modules.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <div class="feature-title">Post-Quantum Readiness</div>
+                <div class="feature-desc">Lattice-based cryptographic migration protocols ensuring long-term security against quantum computing threats. Planned upgrade path for all cryptographic primitives.</div>
+            </div>
+        </div>
+
+        <h3>Risk Categories & Mitigations</h3>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Risk Category</th>
+                    <th>Description</th>
+                    <th>Mitigation Strategy</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Regulatory Risk</td>
+                    <td>Changes in Indonesian or international digital asset regulations</td>
+                    <td>Proactive OJK engagement, regulatory grandfathering clauses, modular compliance architecture</td>
+                </tr>
+                <tr>
+                    <td>Currency Risk</td>
+                    <td>IDR/USD exchange rate volatility affecting investor returns</td>
+                    <td>Danantara USD Bond mechanism, automated hedging protocols, multi-currency reserves</td>
+                </tr>
+                <tr>
+                    <td>Technology Risk</td>
+                    <td>Smart contract vulnerabilities, infrastructure failures</td>
+                    <td>Hashlock audits, Forta/Hypernative monitoring, multi-sig governance, insurance coverage</td>
+                </tr>
+                <tr>
+                    <td>Counterparty Risk</td>
+                    <td>Partner or custodian defaults</td>
+                    <td>Segregated custody, over-collateralization, diversified partner base</td>
+                </tr>
+                <tr>
+                    <td>Political Risk</td>
+                    <td>Changes in government policy or administration</td>
+                    <td>MIGA coverage, bilateral investment treaties, statutory continuity clauses</td>
+                </tr>
+                <tr>
+                    <td>Liquidity Risk</td>
+                    <td>Insufficient market depth for redemptions</td>
+                    <td>Multiple market makers, reserve buffers, circuit breakers, OTC desk backstop</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>ESG & Green Energy Framework</h3>
+
+        <div class="highlight-box">
+            <h4>100% Renewable Infrastructure Commitment</h4>
+            <ul>
+                <li><strong>Proof-of-Green-Compute:</strong> On-chain tracking and attestation of 100% renewable geothermal and solar microgrid usage for all AIDC operations</li>
+                <li><strong>Automated Carbon Credit Issuance:</strong> Real-time tokenization of carbon offsets aligned with global ESG reporting directives (Verra, Gold Standard)</li>
+                <li><strong>Green BTC Mining Zone:</strong> Off-peak stranded renewable energy utilization ensuring ESG compliance for all compute operations</li>
+                <li><strong>780MW Clean Energy Integration:</strong> Farmsent's energy asset portfolio providing verified renewable power</li>
+            </ul>
+        </div>
+
+        <h3>Dispute Resolution Framework</h3>
+        <ul>
+            <li><strong>Decentralized Arbitration:</strong> On-chain dispute resolution linked with SIAC (Singapore) and BANI (Indonesia) international standards</li>
+            <li><strong>BIDAC:</strong> Bandung International Digital Arbitration Centre within the financial corridor for specialized digital asset disputes</li>
+            <li><strong>Legal Recourse:</strong> Specialized frameworks guaranteeing 100% capital repatriation with clear enforcement mechanisms</li>
+            <li><strong>Smart Contract Mediation:</strong> Automated escrow release conditions with multi-sig override for exceptional circumstances</li>
+        </ul>
+    </section>
+
+    <!-- Section XIII: KPIs -->
+    <section class="section" id="kpis">
+        <div class="section-header">
+            <span class="section-number">Section XIII</span>
+            <h2 class="section-title">Key Performance Indicators</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">Quantitative economic projections for the 36-month rollout</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-value">$10-15B</div>
+                <div class="stat-label">Inbound FDI Target</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">1.2-1.8%</div>
+                <div class="stat-label">GDP Contribution</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">5,000+</div>
+                <div class="stat-label">Technical Jobs</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">$50B+</div>
+                <div class="stat-label">Annual Settlement</div>
+            </div>
+        </div>
+
+        <h3>Detailed KPI Framework</h3>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Target</th>
+                    <th>Timeline</th>
+                    <th>Measurement</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Foreign Direct Investment</td>
+                    <td>$10B–$15B institutional liquidity and infrastructure commitments</td>
+                    <td>36 months</td>
+                    <td>Committed capital tracking</td>
+                </tr>
+                <tr>
+                    <td>GDP Contribution</td>
+                    <td>1.2% to 1.8% addition to Indonesia's national GDP</td>
+                    <td>Phase 3 maturity</td>
+                    <td>BPS economic impact study</td>
+                </tr>
+                <tr>
+                    <td>Job Creation</td>
+                    <td>5,000+ specialized roles in cryptography, AI, smart contracts, green energy</td>
+                    <td>36 months</td>
+                    <td>Employment registry</td>
+                </tr>
+                <tr>
+                    <td>On-Chain Settlement</td>
+                    <td>$50B+ annual cross-border commercial clearing via NIDR/sNIDR and GRX</td>
+                    <td>Phase 3</td>
+                    <td>On-chain analytics</td>
+                </tr>
+                <tr>
+                    <td>Partner Jurisdictions</td>
+                    <td>Federated SEZ Protocol deployment across 10+ partner zones</td>
+                    <td>Months 18–36</td>
+                    <td>MOU/agreement tracking</td>
+                </tr>
+                <tr>
+                    <td>RWA Tokenization Volume</td>
+                    <td>$5B+ in tokenized real-world assets</td>
+                    <td>36 months</td>
+                    <td>Platform analytics</td>
+                </tr>
+                <tr>
+                    <td>AIDC Compute Capacity</td>
+                    <td>50 MW operational data center capacity</td>
+                    <td>Phase 3</td>
+                    <td>Infrastructure audit</td>
+                </tr>
+                <tr>
+                    <td>Accelerator Graduates</td>
+                    <td>100+ startups through PFII Financial Tech Accelerator</td>
+                    <td>36 months</td>
+                    <td>Program completion</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Impact Multipliers</h3>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🏭</div>
+                <div class="feature-title">Industrial Spillover</div>
+                <div class="feature-desc">Every $1B in PFII investment generates estimated $2.5B in downstream economic activity through construction, services, and supply chain effects.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎓</div>
+                <div class="feature-title">Human Capital Development</div>
+                <div class="feature-desc">ITB partnership creates sustainable talent pipeline, with 1,000+ students annually gaining blockchain and AI skills through curriculum integration.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <div class="feature-title">Trade Corridor Activation</div>
+                <div class="feature-desc">Asian-African trade facilitation unlocks estimated $100B+ in annual bilateral trade currently constrained by payment friction.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💸</div>
+                <div class="feature-title">Remittance Efficiency</div>
+                <div class="feature-desc">NIDR rails reduce migrant worker remittance costs from 6-8% to under 1%, returning $500M+ annually to Indonesian families.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section XIV: Investor Incentives -->
+    <section class="section" id="incentives">
+        <div class="section-header">
+            <span class="section-number">Section XIV</span>
+            <h2 class="section-title">Investor Incentives</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">Comprehensive benefits for foreign institutional investors</p>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <div class="feature-title">20-Year Tax Holidays</div>
+                <div class="feature-desc">Complete corporate income tax exemption for accredited digital asset entities, data center operators, and financial service providers within BDAZ. Regulatory grandfathering ensures benefits persist through investment term.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💵</div>
+                <div class="feature-title">FX Volatility Protection</div>
+                <div class="feature-desc">Full downside protection against IDR currency fluctuations via USD-denominated Danantara sovereign bonds as NIDR collateral. Investors access Indonesian growth without currency risk.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛂</div>
+                <div class="feature-title">Golden Visa Program</div>
+                <div class="feature-desc">5-10 year fast-tracked residency for qualifying investors and executives. Simplified tax registration, streamlined executive relocation, and robust legal asset protection included.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💎</div>
+                <div class="feature-title">100% Capital Repatriation</div>
+                <div class="feature-desc">Guaranteed foreign capital repatriation with automated FX liquidity pools and liquid secondary market exit options. No capital controls or repatriation delays.</div>
+            </div>
+        </div>
+
+        <h3>Strategic Supply Chain Access</h3>
+        <ul>
+            <li><strong>10-20 year off-take rights</strong> for physical gold, nickel, copper, tin, and rare earth minerals at negotiated pricing</li>
+            <li><strong>Priority agricultural access</strong> to Parahyangan commodities including premium coffee, tea, and spices</li>
+            <li><strong>24/7 on-chain exchange access</strong> via Bandung RWA Commodity Exchange and Global RWA Exchange (GRX)</li>
+            <li><strong>Direct carbon credit bundling</strong> from West Java green projects with verified ESG certification</li>
+            <li><strong>AIDC compute allocation</strong> with guaranteed SLA and priority access during capacity constraints</li>
+        </ul>
+
+        <h3>Investor Tiers & Benefits</h3>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Tier</th>
+                    <th>Commitment</th>
+                    <th>Additional Benefits</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Cornerstone LP</td>
+                    <td>$100M+</td>
+                    <td>Investment Committee seat, priority co-investment, dedicated account team, BIDAC board nomination</td>
+                </tr>
+                <tr>
+                    <td>Strategic LP</td>
+                    <td>$25M-$100M</td>
+                    <td>Advisory Board observer seat, enhanced reporting, priority deal flow, executive residence support</td>
+                </tr>
+                <tr>
+                    <td>Standard LP</td>
+                    <td>$5M-$25M</td>
+                    <td>Quarterly reporting, investor portal access, annual summit invitation</td>
+                </tr>
+                <tr>
+                    <td>Qualified Investor</td>
+                    <td>$1M-$5M</td>
+                    <td>Basic reporting, digital portal access, newsletter</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Societal Impact: Worker Remittances</h3>
+        <div class="highlight-box">
+            <p>Beyond institutional finance, PFII drives direct social uplift for millions of Indonesian migrant workers overseas. Using low-cost, instant NIDR stablecoin rails, overseas workers send cross-border remittances home with <strong>zero intermediary bank fees</strong>, delivering instantaneous liquidity directly to family accounts in Indonesia.</p>
+            <ul>
+                <li><strong>9 million</strong> Indonesian migrant workers worldwide benefit from reduced remittance costs</li>
+                <li><strong>$12 billion</strong> in annual remittances, with $500M+ in savings from fee reduction</li>
+                <li><strong>Sub-2-minute</strong> settlement versus 3-5 day traditional bank transfers</li>
+                <li><strong>Financial inclusion</strong> for unbanked family recipients via digital wallet access</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section XV: Partnership Ecosystem - COMPREHENSIVE -->
+    <section class="section" id="partnerships">
+        <div class="section-header">
+            <span class="section-number">Section XV</span>
+            <h2 class="section-title">Comprehensive Partnership Ecosystem</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">World-class consortium across government, technology, finance, and infrastructure</p>
+        </div>
+
+        <h3>Government & Regulatory Partners</h3>
+
+        <div class="partner-card">
+            <div class="partner-name">Government of Bandung (Pemkot Bandung)</div>
+            <div class="partner-type">Municipal Government Partner</div>
+            <div class="partner-desc">
+                <strong>Primary municipal administration partner</strong> providing sovereign backing for BDAZ development. Under Mayor Muhammad Farhan's leadership, Pemkot Bandung has committed full administrative resources including:
+                <ul>
+                    <li>Fast-tracked land assembly along the 12km Cibeureum-Cicaheum corridor</li>
+                    <li>Expedited permit processing through single-window licensing</li>
+                    <li>20-year municipal tax holiday for qualifying enterprises</li>
+                    <li>Integration with West Java provincial data infrastructure</li>
+                    <li>Dedicated BDAZ authority for zone administration</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">Otoritas Jasa Keuangan (OJK)</div>
+            <div class="partner-type">Financial Services Authority</div>
+            <div class="partner-desc">
+                <strong>Indonesia's financial regulatory authority</strong> providing sandbox administration and licensing framework for digital asset operations. OJK collaboration includes:
+                <ul>
+                    <li>NIDR stablecoin regulatory sandbox and pathway to full licensing</li>
+                    <li>Digital asset exchange licensing under evolving Indonesian regulations</li>
+                    <li>Neo-banking license facilitation for PT Bandung Digital Neo</li>
+                    <li>Cross-border fintech regulatory coordination</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">Bank Indonesia</div>
+            <div class="partner-type">Central Bank</div>
+            <div class="partner-desc">
+                <strong>Indonesia's central bank</strong> ensuring monetary stability and CBDC interoperability planning. Bank Indonesia engagement includes:
+                <ul>
+                    <li>Digital Rupiah (CBDC) pilot coordination</li>
+                    <li>Cross-border payment system integration</li>
+                    <li>Monetary policy alignment for stablecoin operations</li>
+                    <li>Foreign exchange regime oversight within BDAZ</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">BPI Danantara</div>
+            <div class="partner-type">Sovereign Wealth Fund</div>
+            <div class="partner-desc">
+                <strong>Indonesia's sovereign wealth management entity</strong> serving as cornerstone investor and national strategic coordinator. Led by CEO Rosan Roeslani, Danantara provides:
+                <ul>
+                    <li>Cornerstone LP investment in PFII Fund</li>
+                    <li>USD-denominated sovereign bond issuance for FX protection mechanism</li>
+                    <li>SOE (State-Owned Enterprise) asset onboarding facilitation</li>
+                    <li>National AI and digital economy policy alignment</li>
+                    <li>Strategic infrastructure co-investment</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>Core Ecosystem Partners</h3>
+
+        <div class="partner-card">
+            <div class="partner-name">Farmsent</div>
+            <div class="partner-type">General Partner & Ecosystem Architect</div>
+            <div class="partner-desc">
+                <strong>Primary ecosystem architect and General Partner</strong> of the PFII Fund. Founded by Yog Shrusti, Farmsent provides the technical foundation and strategic direction including:
+                <ul>
+                    <li>NIDR/sNIDR smart contract architecture and development</li>
+                    <li>DePIN protocol design and 780MW energy asset integration</li>
+                    <li>Batam GPU cluster operations for distributed compute</li>
+                    <li>RWA tokenization platform development</li>
+                    <li>Government relations and sovereign partnership management</li>
+                    <li>Ecosystem strategy and technology roadmap</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">NIDR (Nusantara IDR)</div>
+            <div class="partner-type">Stablecoin Infrastructure</div>
+            <div class="partner-desc">
+                <strong>Core stablecoin infrastructure provider</strong> developing the NIDR 1:1 Rupiah-pegged stablecoin and sNIDR yield-bearing token. Co-founded by Yog Shrusti and Elvis Su, NIDR delivers:
+                <ul>
+                    <li>1:1 fiat-backed stablecoin with real-time reserve attestation</li>
+                    <li>Yield-bearing sNIDR backed by Indonesian Government Bonds (SBN)</li>
+                    <li>T+0 cross-border settlement infrastructure</li>
+                    <li>Neo-banking integration and digital wallet infrastructure</li>
+                    <li>Multi-chain deployment across Polygon, TON, and partner networks</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">Insight Capital</div>
+            <div class="partner-type">Co-GP & International Capital</div>
+            <div class="partner-desc">
+                <strong>Co-General Partner managing international fundraising</strong> and global LP relations. Founded by Benny Cheng with 25+ years financial services experience, Insight Capital provides:
+                <ul>
+                    <li>Hong Kong SFO-regulated fund management</li>
+                    <li>Global family office and institutional LP syndication</li>
+                    <li>Mirae Asset distribution channel management</li>
+                    <li>International regulatory compliance expertise</li>
+                    <li>Cross-border capital structuring</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">IRWATA (Indonesian Real World Asset Tokenization Association)</div>
+            <div class="partner-type">Industry Association</div>
+            <div class="partner-desc">
+                <strong>National industry association driving RWA standards</strong> and institutional adoption across Indonesia. Founded by Yog Shrusti, IRWATA provides:
+                <ul>
+                    <li>RWA tokenization standards development and best practices</li>
+                    <li>Industry education and institutional onboarding</li>
+                    <li>Regulatory advocacy and policy consultation</li>
+                    <li>Cross-sector coordination among financial institutions</li>
+                    <li>International standards alignment (ISO, W3C, FATF)</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>Technology & Infrastructure Partners</h3>
+
+        <div class="partner-card">
+            <div class="partner-name">Polygon Network</div>
+            <div class="partner-type">Blockchain Infrastructure</div>
+            <div class="partner-desc">
+                <strong>Enterprise L2/L3 blockchain infrastructure</strong> providing the core settlement layer for PFII. Advisory relationship with Co-Founder Sandeep Nailwal includes:
+                <ul>
+                    <li>Custom enterprise L2/L3 deployment with ZK consensus</li>
+                    <li>10,000+ TPS throughput with sub-second finality</li>
+                    <li>EVM-compatible smart contract infrastructure</li>
+                    <li>Native bridges to Ethereum mainnet</li>
+                    <li>Enterprise support and technical consultation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">Stripe</div>
+            <div class="partner-type">Payment Infrastructure</div>
+            <div class="partner-desc">
+                <strong>Global payment processing infrastructure</strong> enabling seamless fiat on/off ramps and traditional payment integration:
+                <ul>
+                    <li>Fiat payment processing for NIDR minting/redemption</li>
+                    <li>International card acceptance and bank transfers</li>
+                    <li>Compliance and fraud prevention infrastructure</li>
+                    <li>API integration for enterprise payment flows</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">Forta Network</div>
+            <div class="partner-type">Security Infrastructure</div>
+            <div class="partner-desc">
+                <strong>Real-time blockchain security monitoring</strong> providing threat detection across all PFII smart contracts:
+                <ul>
+                    <li>24/7 automated threat detection and alerting</li>
+                    <li>Machine learning anomaly detection for unusual transaction patterns</li>
+                    <li>Integration with circuit breaker automated response systems</li>
+                    <li>Compliance monitoring and regulatory reporting support</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">Hypernative</div>
+            <div class="partner-type">Predictive Security</div>
+            <div class="partner-desc">
+                <strong>Predictive security platform</strong> using AI to identify threats before they materialize:
+                <ul>
+                    <li>Pre-exploit vulnerability detection</li>
+                    <li>Smart contract risk scoring and monitoring</li>
+                    <li>Automated incident response integration</li>
+                    <li>Institutional-grade security SLA compliance</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">peaq Network</div>
+            <div class="partner-type">DePIN Infrastructure</div>
+            <div class="partner-desc">
+                <strong>Layer 1 blockchain for machine economy</strong> enabling DePIN and IoT integration:
+                <ul>
+                    <li>Native machine-to-machine payment infrastructure</li>
+                    <li>DePIN protocol support for energy and compute networks</li>
+                    <li>IoT device identity and transaction management</li>
+                    <li>Integration with AIDC and green compute infrastructure</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">TON Network (Telegram Open Network)</div>
+            <div class="partner-type">Consumer Blockchain</div>
+            <div class="partner-desc">
+                <strong>Telegram-native blockchain</strong> for consumer-facing applications within Indonesia's massive Telegram user base:
+                <ul>
+                    <li>Seamless wallet integration with Telegram messaging</li>
+                    <li>Micropayment infrastructure for social commerce</li>
+                    <li>Consumer onboarding and mass adoption channel</li>
+                    <li>NIDR deployment for retail transactions</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">AVTR Network</div>
+            <div class="partner-type">AI Data Center Infrastructure</div>
+            <div class="partner-desc">
+                <strong>Purpose-built AI data center infrastructure</strong> designed from first principles for Southeast Asia's sovereign AI and enterprise compute demands:
+                <ul>
+                    <li>Sovereign-grade, locally-rooted infrastructure for hyperscalers and national AI programmes</li>
+                    <li>Purpose-built facilities for thermal, power, and connectivity demands of frontier AI workloads</li>
+                    <li>Deep understanding of regional regulatory landscape, energy grid, and geopolitical dynamics</li>
+                    <li>Not repurposed enterprise data centers — engineered specifically for next-generation AI compute</li>
+                    <li>Strategic infrastructure partner for AIDC and BDAZ compute operations</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">Hashlock</div>
+            <div class="partner-type">Security Auditing</div>
+            <div class="partner-desc">
+                <strong>Smart contract security auditing firm</strong> providing formal verification and continuous monitoring:
+                <ul>
+                    <li>Pre-deployment security audits for all smart contracts</li>
+                    <li>Formal verification of critical financial logic</li>
+                    <li>Ongoing monitoring and vulnerability assessment</li>
+                    <li>Incident response and remediation support</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>Identity & Compliance Partners</h3>
+
+        <div class="partner-card">
+            <div class="partner-name">Privy</div>
+            <div class="partner-type">Wallet Infrastructure</div>
+            <div class="partner-desc">
+                <strong>Embedded wallet and authentication infrastructure</strong> enabling seamless user onboarding:
+                <ul>
+                    <li>Social login and passwordless authentication</li>
+                    <li>Embedded wallet creation without seed phrase management</li>
+                    <li>Enterprise SSO integration</li>
+                    <li>Compliance-ready identity verification flows</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">Billions Network</div>
+            <div class="partner-type">ZKP Identity</div>
+            <div class="partner-desc">
+                <strong>Zero-Knowledge Proof identity infrastructure</strong> for privacy-preserving compliance:
+                <ul>
+                    <li>ZKP-based KYC/KYB verification</li>
+                    <li>Reusable identity credentials across ecosystem</li>
+                    <li>Selective disclosure for regulatory compliance</li>
+                    <li>W3C SSI standards implementation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">Didit</div>
+            <div class="partner-type">Decentralized Identity</div>
+            <div class="partner-desc">
+                <strong>Decentralized identity verification platform</strong> for cross-border credential management:
+                <ul>
+                    <li>Global identity verification and credential issuance</li>
+                    <li>Cross-jurisdiction compliance portability</li>
+                    <li>Biometric verification integration</li>
+                    <li>Enterprise identity management</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>Financial & Exchange Partners</h3>
+
+        <div class="partner-card">
+            <div class="partner-name">Mirae Asset</div>
+            <div class="partner-type">Strategic Financial Partner</div>
+            <div class="partner-desc">
+                <strong>Global financial services group</strong> providing institutional distribution and product structuring:
+                <ul>
+                    <li>Tokenized fund wrapper structuring expertise</li>
+                    <li>Asian and European capital market distribution</li>
+                    <li>Regulated product compliance frameworks</li>
+                    <li>Strategic LP investment in PFII Fund</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">KuCoin</div>
+            <div class="partner-type">Digital Asset Exchange</div>
+            <div class="partner-desc">
+                <strong>Global digital asset exchange</strong> providing liquidity and market access:
+                <ul>
+                    <li>NIDR/sNIDR listing and trading pairs</li>
+                    <li>Institutional OTC trading desk access</li>
+                    <li>Market making and liquidity provision</li>
+                    <li>Global retail distribution channel</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">Bison Bank</div>
+            <div class="partner-type">European Banking</div>
+            <div class="partner-desc">
+                <strong>Portuguese digital asset bank</strong> providing European banking rails and regulatory access:
+                <ul>
+                    <li>EU-regulated banking infrastructure</li>
+                    <li>Euro on/off ramp for NIDR</li>
+                    <li>European institutional custody services</li>
+                    <li>MiCA-compliant operations framework</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">Onramper</div>
+            <div class="partner-type">Fiat Gateway Aggregator</div>
+            <div class="partner-desc">
+                <strong>Fiat on-ramp aggregation platform</strong> enabling multi-provider payment access:
+                <ul>
+                    <li>Aggregated access to 50+ payment providers globally</li>
+                    <li>Optimized routing for best rates and availability</li>
+                    <li>Single API integration for multiple fiat rails</li>
+                    <li>Regional payment method coverage</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">Onramp</div>
+            <div class="partner-type">Fiat Infrastructure</div>
+            <div class="partner-desc">
+                <strong>Direct fiat on/off-ramp infrastructure</strong> for institutional and retail flows:
+                <ul>
+                    <li>Bank transfer and card payment processing</li>
+                    <li>Institutional wire transfer support</li>
+                    <li>Compliance and AML screening integration</li>
+                    <li>Multi-currency support</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">Kem Stablecoin</div>
+            <div class="partner-type">Stablecoin Partner</div>
+            <div class="partner-desc">
+                <strong>Regional stablecoin infrastructure partner</strong> for cross-border settlement:
+                <ul>
+                    <li>Stablecoin interoperability and bridges</li>
+                    <li>Regional currency pair liquidity</li>
+                    <li>Cross-stablecoin settlement infrastructure</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>Academic & Research Partners</h3>
+
+        <div class="partner-card">
+            <div class="partner-name">Institut Teknologi Bandung (ITB)</div>
+            <div class="partner-type">Academic Partner</div>
+            <div class="partner-desc">
+                <strong>Indonesia's premier technical university</strong> providing talent pipeline and research collaboration:
+                <ul>
+                    <li>PFII Financial Tech Accelerator program partnership</li>
+                    <li>Blockchain and cryptography research collaboration</li>
+                    <li>Graduate recruitment and internship programs</li>
+                    <li>AI/ML research partnerships for AIDC applications</li>
+                    <li>Continuing education and certification programs</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">World Gold Council (WGC)</div>
+            <div class="partner-type">Commodity Standards</div>
+            <div class="partner-desc">
+                <strong>Global gold industry authority</strong> providing standards for tokenized gold operations:
+                <ul>
+                    <li>Gold tokenization standards and best practices</li>
+                    <li>Bandung Gold Price Index (BGPI) methodology consultation</li>
+                    <li>Vault certification and custody standards</li>
+                    <li>International market integration guidance</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-name">Global Blockchain Business Council (GBBC)</div>
+            <div class="partner-type">Industry Council</div>
+            <div class="partner-desc">
+                <strong>International blockchain industry organization</strong> providing standards and diplomatic connections. Sim Khela serves as Indonesia Ambassador to GBBC:
+                <ul>
+                    <li>International Web3 compliance and standards alignment</li>
+                    <li>Global policy advocacy and regulatory engagement</li>
+                    <li>Cross-border partnership introductions</li>
+                    <li>Industry best practices and education</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section XVI: Leadership Team - COMPLETE PROFILES -->
+    <section class="section" id="leadership">
+        <div class="section-header">
+            <span class="section-number">Section XVI</span>
+            <h2 class="section-title">Leadership Team — Complete Profiles</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">World-class leadership spanning government, finance, technology, and international relations</p>
+        </div>
+
+        <div class="leader-card">
+            <div class="leader-name">Muhammad Farhan</div>
+            <div class="leader-title">Mayor of Bandung — Government Champion</div>
+            <div class="leader-bio">
+                <p><strong>Muhammad Farhan</strong> serves as the <strong>Mayor of Bandung</strong>, the capital of West Java province with a metropolitan population of over 8 million. As the primary government champion of BDAZ, Mayor Farhan has committed the full resources of the Bandung municipal administration to establishing the city as Indonesia's premier sovereign digital asset hub.</p>
+                <p>Under his leadership, Pemkot Bandung has enacted comprehensive regulatory frameworks for the 12km Cibeureum-Cicaheum Financial Corridor, including expedited permitting processes, 20-year municipal tax holidays for qualifying enterprises, and dedicated land assembly authority. Mayor Farhan's vision positions Bandung as the natural successor to its 1955 Asian-African Conference legacy—now serving as a neutral digital financial hub for Global South cooperation.</p>
+                <p><strong>Key Contributions:</strong></p>
+                <ul>
+                    <li>Municipal regulatory framework for BDAZ Special Economic Zone</li>
+                    <li>Fast-tracked land assembly and permit concierge services</li>
+                    <li>Provincial data infrastructure consolidation serving 27 West Java regencies</li>
+                    <li>Golden Visa and investor residence facilitation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="leader-card">
+            <div class="leader-name">Basuri Tjahaja Purnama</div>
+            <div class="leader-title">Strategic Advisor — Former Regent of East Belitung, Commissioner of JIEP</div>
+            <div class="leader-bio">
+                <p><strong>Basuri Tjahaja Purnama</strong> brings decades of Indonesian government and economic development experience to PFII as <strong>Strategic Advisor</strong>. As former Regent of East Belitung Regency and current Commissioner of Jakarta Industrial Estate Pulogadung (JIEP), Basuri provides critical government relations expertise and industrial zone development knowledge.</p>
+                <p>His extensive experience navigating Indonesian regulatory environments, combined with deep relationships across national and regional government agencies, enables PFII to accelerate approvals and ensure alignment with national economic priorities. Basuri's background in managing industrial zones directly informs BDAZ's physical infrastructure development and enterprise attraction strategy.</p>
+                <p><strong>Key Contributions:</strong></p>
+                <ul>
+                    <li>National government relations and regulatory navigation</li>
+                    <li>Industrial zone development and enterprise attraction expertise</li>
+                    <li>SOE (State-Owned Enterprise) coordination and partnership facilitation</li>
+                    <li>Strategic counsel on Indonesian political economy</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="leader-card">
+            <div class="leader-name">Rosan Roeslani</div>
+            <div class="leader-title">CEO, BPI Danantara — Sovereign Wealth Alignment</div>
+            <div class="leader-bio">
+                <p><strong>Rosan Roeslani</strong> serves as <strong>CEO of Badan Pengelola Investasi Daya Anagata Nusantara (BPI Danantara)</strong>, Indonesia's sovereign wealth management entity. In this role, he directs the strategic management of Indonesia's sovereign assets and oversees the deployment of national strategic capital.</p>
+                <p>Rosan's leadership of Danantara positions PFII with direct access to sovereign capital and national policy alignment. The Danantara USD Bond mechanism—enabling foreign investors to access Indonesian growth with FX protection—represents a landmark innovation in sovereign wealth fund engagement with digital asset infrastructure.</p>
+                <p><strong>Key Contributions:</strong></p>
+                <ul>
+                    <li>Cornerstone LP investment from sovereign wealth sources</li>
+                    <li>USD-denominated sovereign bond issuance for FX protection</li>
+                    <li>SOE asset onboarding and coordination</li>
+                    <li>National AI and digital economy policy alignment</li>
+                    <li>Strategic infrastructure co-investment authority</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="leader-card">
+            <div class="leader-name">Yog Shrusti</div>
+            <div class="leader-title">Founder, Farmsent, IRWATA & NIDR — Ecosystem Architect</div>
+            <div class="leader-bio">
+                <p><strong>Yog Shrusti</strong> serves as the primary <strong>Ecosystem Architect</strong> for PFII, bringing together his roles as Founder of <strong>Farmsent</strong> (the General Partner), <strong>IRWATA</strong> (Indonesian Real World Asset Tokenization Association), and co-founder of <strong>NIDR</strong> (Nusantara IDR stablecoin).</p>
+                <p>As a recognized authority on sovereign digital asset freezones and RWA tokenization, Yog provides the technical vision and architectural leadership driving PFII's development. His integrated perspective across the GP, industry association, and core stablecoin infrastructure ensures coherent ecosystem development. Yog's work with IRWATA has established Indonesia's national framework for RWA tokenization standards and institutional adoption.</p>
+                <p><strong>Key Contributions:</strong></p>
+                <ul>
+                    <li>PFII sovereign digital asset freezone architecture design</li>
+                    <li>NIDR/sNIDR stablecoin technical architecture and smart contract development</li>
+                    <li>RWA tokenization protocols and standards (IRWATA)</li>
+                    <li>DePIN integration including 780MW energy asset portfolio</li>
+                    <li>Batam GPU cluster operations and distributed compute strategy</li>
+                    <li>Government partnership development and sovereign relations</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="leader-card">
+            <div class="leader-name">Sabdo Yusmintiarto</div>
+            <div class="leader-title">Executive Advisor — Sovereign Digital Asset Frameworks</div>
+            <div class="leader-bio">
+                <p><strong>Sabdo Yusmintiarto</strong> serves as <strong>Executive Advisor on PFII Sovereign Digital Asset Frameworks</strong>, providing strategic counsel on the integration of digital asset infrastructure with Indonesian regulatory and economic policy objectives.</p>
+                <p>With deep expertise in financial technology regulation and sovereign economic development, Sabdo advises on the optimal structuring of PFII to achieve national strategic objectives while maintaining international competitiveness. His guidance ensures that PFII's architecture aligns with Bank Indonesia monetary policy, OJK regulatory frameworks, and broader Indonesian economic development goals.</p>
+                <p><strong>Key Contributions:</strong></p>
+                <ul>
+                    <li>Sovereign digital asset framework strategic design</li>
+                    <li>Regulatory strategy and OJK/Bank Indonesia engagement</li>
+                    <li>Economic policy alignment and national development integration</li>
+                    <li>Institutional partnership strategy</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="leader-card">
+            <div class="leader-name">Sim Khela</div>
+            <div class="leader-title">Indonesia Ambassador to GBBC — International Relations</div>
+            <div class="leader-bio">
+                <p><strong>Sim Khela</strong> serves as <strong>Indonesia's Ambassador to the Global Blockchain Business Council (GBBC)</strong> and Farmsent Representative for international relations. In this capacity, she represents Indonesian blockchain interests on the global stage and facilitates international partnerships and standards alignment.</p>
+                <p>As the primary interface between PFII and the international blockchain policy community, Sim ensures that Indonesia's sovereign digital asset framework maintains alignment with emerging global standards while advancing Indonesian interests. Her diplomatic role enables PFII to participate in shaping international digital asset regulation rather than merely responding to it.</p>
+                <p><strong>Key Contributions:</strong></p>
+                <ul>
+                    <li>GBBC representation and international standards advocacy</li>
+                    <li>Global partnership development and diplomatic liaison</li>
+                    <li>Cross-border regulatory coordination</li>
+                    <li>International conference representation and thought leadership</li>
+                    <li>Farmsent international business development</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="leader-card">
+            <div class="leader-name">Elvis Su</div>
+            <div class="leader-title">Co-Founder, NIDR — Investment Lead for AIDC</div>
+            <div class="leader-bio">
+                <p><strong>Elvis Su</strong> serves as <strong>Co-Founder of NIDR</strong> and <strong>Investment Lead for AI Data Center (AIDC)</strong> infrastructure within the PFII ecosystem. His dual role bridges the stablecoin infrastructure with the strategic compute layer, ensuring coherent development of PFII's digital and physical assets.</p>
+                <p>Elvis brings extensive experience in technology investment and infrastructure development, guiding the capitalization and construction of PFII's high-density AI data center facilities. His leadership ensures that AIDC development proceeds in alignment with NIDR settlement requirements and broader ecosystem needs.</p>
+                <p><strong>Key Contributions:</strong></p>
+                <ul>
+                    <li>NIDR co-architecture and stablecoin ecosystem development</li>
+                    <li>AIDC investment strategy and capital raising</li>
+                    <li>GPU infrastructure procurement and deployment</li>
+                    <li>Green compute and renewable energy integration</li>
+                    <li>Technology partnership development</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="leader-card">
+            <div class="leader-name">Benny Cheng</div>
+            <div class="leader-title">Founder & CEO, Insight Capital — Co-GP & International Capital</div>
+            <div class="leader-bio">
+                <p><strong>Benny Cheng</strong> serves as <strong>Founder and CEO of Insight Capital</strong>, the Co-General Partner of the PFII Fund. With <strong>over 25 years of financial services experience</strong>, Benny brings institutional-grade fund management expertise and global capital network access to PFII.</p>
+                <p>Operating under <strong>Hong Kong Securities and Futures Commission (SFO) regulation</strong>, Insight Capital provides the international fundraising capability and LP relationship management essential for PFII's $3-5B first close target. Benny's extensive relationships with family offices, sovereign wealth funds, and institutional investors across Asia, Europe, and the Middle East enable PFII to access global capital at scale.</p>
+                <p><strong>Key Contributions:</strong></p>
+                <ul>
+                    <li>Co-GP fund management and fiduciary oversight</li>
+                    <li>Global LP syndication and capital raising</li>
+                    <li>Mirae Asset distribution channel management</li>
+                    <li>Hong Kong SFO regulatory compliance</li>
+                    <li>International family office and institutional investor relations</li>
+                    <li>Fund structuring and cross-border capital engineering</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section XVII: Advisory Councils -->
+    <section class="section" id="advisory">
+        <div class="section-header">
+            <span class="section-number">Section XVII</span>
+            <h2 class="section-title">Advisory Councils</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">World-class advisors guiding global expansion and technical excellence</p>
+        </div>
+
+        <h3>Export & Global Advisory Council</h3>
+        <p>Composed of global Web3, financial infrastructure, and enterprise growth leaders guiding global corridor expansion, cross-border tokenized asset syndication, and BRICS stablecoin integration.</p>
+
+        <div class="leader-card">
+            <div class="leader-name">Sandeep Nailwal</div>
+            <div class="leader-title">Co-Founder, Polygon — Blockchain Infrastructure Advisor</div>
+            <div class="leader-bio">
+                <p><strong>Sandeep Nailwal</strong> is the <strong>Co-Founder of Polygon</strong>, one of the world's leading blockchain scaling solutions with over $1 billion in total value locked and partnerships with major enterprises including Meta, Starbucks, Nike, and Reddit.</p>
+                <p>As a strategic advisor to PFII, Sandeep provides direct guidance on enterprise blockchain architecture, ZK-rollup implementation, and scaling infrastructure to support PFII's 10,000+ TPS requirements. His experience building Polygon from a startup to a leading blockchain infrastructure provider informs PFII's technical roadmap and partnership strategy.</p>
+                <p>Sandeep's advisory relationship ensures PFII benefits from Polygon's cutting-edge enterprise L2/L3 technology, including custom deployment support, enterprise-grade SLAs, and ongoing technical consultation. His endorsement provides significant credibility with institutional investors and technology partners evaluating PFII's infrastructure.</p>
+                <p><strong>Advisory Focus:</strong></p>
+                <ul>
+                    <li>Enterprise blockchain architecture and ZK-rollup strategy</li>
+                    <li>Scaling infrastructure for high-throughput settlement</li>
+                    <li>Institutional adoption and enterprise partnership guidance</li>
+                    <li>Global Web3 ecosystem introductions and credibility</li>
+                    <li>Technical roadmap review and validation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="leader-card">
+            <div class="leader-name">Sandy Carter</div>
+            <div class="leader-title">COO, Unstoppable Domains — Web3 Adoption Advisor</div>
+            <div class="leader-bio">
+                <p><strong>Sandy Carter</strong> serves as <strong>Chief Operating Officer of Unstoppable Domains</strong>, the leading provider of Web3 domain names and digital identity with over 4 million registered domains. Previously, Sandy held senior leadership roles at Amazon Web Services (AWS) and IBM, where she drove enterprise cloud and blockchain adoption.</p>
+                <p>As a PFII advisor, Sandy brings unparalleled expertise in enterprise Web3 adoption, digital identity infrastructure, and go-to-market strategy for blockchain products. Her experience scaling Unstoppable Domains and her prior roles at AWS and IBM provide PFII with actionable guidance on enterprise customer acquisition and product-market fit.</p>
+                <p>Sandy's deep relationships with Fortune 500 enterprises and her track record of successful Web3 product launches inform PFII's approach to institutional onboarding and user experience design. Her advisory role strengthens PFII's positioning as an enterprise-grade digital asset infrastructure platform.</p>
+                <p><strong>Advisory Focus:</strong></p>
+                <ul>
+                    <li>Web3 identity and digital credential strategy</li>
+                    <li>Enterprise adoption and institutional onboarding</li>
+                    <li>Product-market fit and go-to-market strategy</li>
+                    <li>Fortune 500 relationship development</li>
+                    <li>User experience and accessibility guidance</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>Legal Advisory Council</h3>
+        <p>Combining leading international legal scholars with premier Indonesian regulatory counsel to continuously adapt, optimize, and enforce the PFII framework under Law UU P2SK and international standards.</p>
+
+        <div class="highlight-box">
+            <h4>Legal Advisory Mandate</h4>
+            <ul>
+                <li>Continuous monitoring of Indonesian and international digital asset regulatory developments</li>
+                <li>Framework optimization for investor protection and regulatory compliance</li>
+                <li>BIDAC arbitration standards and smart contract legal wrapper design</li>
+                <li>Cross-border legal coordination and treaty alignment</li>
+                <li>MIGA political risk insurance structuring</li>
+            </ul>
+        </div>
+
+        <h3>Technical Advisory Board</h3>
+        <p>Expert technologists providing ongoing guidance on blockchain architecture, security, and infrastructure development.</p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <div class="feature-title">Security Advisors</div>
+                <div class="feature-desc">Representatives from Forta, Hypernative, and Hashlock providing continuous security guidance and threat intelligence sharing.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Infrastructure Advisors</div>
+                <div class="feature-desc">Polygon enterprise team and peaq network specialists advising on scaling, interoperability, and DePIN integration.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎓</div>
+                <div class="feature-title">Academic Advisors</div>
+                <div class="feature-desc">ITB faculty members providing research collaboration and curriculum development guidance for the Financial Tech Accelerator.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <div class="feature-title">Standards Advisors</div>
+                <div class="feature-desc">GBBC representatives ensuring alignment with international compliance standards and regulatory best practices.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+        <img src="Farmsent-Logo.svg" alt="Farmsent" class="footer-logo">
+        <p class="footer-text" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">Conceptualized by Farmsent</p>
+        <p class="footer-text"><strong>Pusat Finansial Internasional Indonesia (PFII)</strong></p>
+        <p class="footer-text">Bandung Digital Asset Zone | Cibeureum–Cicaheum Financial Corridor</p>
+        <p class="footer-text">Indonesia's Sovereign Digital Asset Financial Freezone</p>
+        <p class="footer-text" style="margin-top: 20px; color: var(--accent-gold);">Version 2.0 — Expanded Edition</p>
+        <p class="footer-disclaimer">
+            This whitepaper is for informational purposes only and does not constitute investment advice, financial advice, trading advice, or any other sort of advice. The information contained herein is subject to change and may be updated from time to time. Prospective investors should conduct their own due diligence and consult with professional advisors before making any investment decisions. PFII operates under Indonesian Law UU P2SK with oversight from OJK and Bank Indonesia.
+        </p>
+    </footer>
+
+</body>
+</html>
